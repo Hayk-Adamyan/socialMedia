@@ -7,10 +7,6 @@ import Dialogs from "./components/Profile/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
 import { BrowserRouter, Route } from "react-router-dom";
 
-// useEffect(()=>{
-
-// },[])
-
 const App = (props) => {
   return (
     <BrowserRouter>
@@ -18,8 +14,16 @@ const App = (props) => {
         <Header />
         <Navbar />
         <div className="app-wrapper-content">
-          <Route  path="/dialogs" component={Dialogs} />
-          <Route path="/profile" component={Profile} />
+          <Route
+            path="/dialogs"
+            render={() => (
+              <Dialogs dialogs={props.dialogs} messages={props.messages} />
+            )}
+          />
+          <Route
+            path="/profile"
+            render={() => <Profile postData={props.postData} />}
+          />
         </div>
       </div>
     </BrowserRouter>
